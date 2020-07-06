@@ -1,10 +1,12 @@
 # train-on-aws
 
+🛠️ Command line tools to run machine learning scripts on AWS instances
+
 These scripts enable you to launch AWS instances, run commands on them, and sync the 
 output back to your local computer. This is useful for long-running processes such as 
 training machine learning models.
 
-xw
+
 ## Requirements
 
 1. [Install](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) 
