@@ -5,7 +5,9 @@
 train-on-aws is a set of scripts to run machine learning tasks on AWS. With one 
 simple command, it spins up an AWS instance (from your own account), transfers your 
 code & dataset, starts the training run, syncs all output files back to your computer, 
-and terminates the instance after training has finished.
+and terminates the instance after training has finished. It really shines when you need 
+to quickly launch multiple, long-running jobs in parallel (e.g. for hyperparameter 
+optimization). 
 
 
 ## Demo
