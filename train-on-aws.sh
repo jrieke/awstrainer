@@ -8,8 +8,7 @@
 # Note that the AWS CLI has to be installed and connected to your AWS account.
 
 # Parameters.
-#KEY_FILE="aws-key.pem"  # your private key file for AWS
-KEY_FILE="/Users/jrieke/Desktop/johannes-aws-key.pem"  # your private key file for AWS
+KEY_FILE="aws-key.pem"  # your private key file for AWS
 LAUNCH_TEMPLATE_ID="lt-01ca80d3c2a68e893"  # the launch template from AWS that should be used to create the instance
 USER="ubuntu"  # the username on the AWS instance (depends on your AMI)
 DIR="test-project"  # the path to your project dir

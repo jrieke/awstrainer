@@ -3,8 +3,7 @@
 # This script syncs out dirs from all your AWS instances to your local computer.
 
 # Parameters.
-#KEY_FILE="aws-key.pem"  # your private key file for AWS
-KEY_FILE="/Users/jrieke/Desktop/johannes-aws-key.pem"  # your private key file for AWS
+KEY_FILE="aws-key.pem"  # your private key file for AWS
 USER="ubuntu"  # the username on the AWS instance (depends on your AMI)
 REMOTE_OUT_DIR="test-project/out/"  # the out dir of your remote instances
 LOCAL_SYNC_DIR="aws-synced-out"  # the dir where to store all downloaded out dirs
