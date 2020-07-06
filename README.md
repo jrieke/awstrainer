@@ -8,6 +8,13 @@ code & dataset, starts the training run, syncs all output files back to your com
 and terminates the instance after training has finished.
 
 
+## Demo
+
+![](docs/images/demo.gif)
+
+(Boring parts cut out ;)
+
+
 ## Requirements
 
 1. [Install](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) 
@@ -39,5 +46,12 @@ E.g., to sync output files every 15 minutes, run
 and add this line to the bottom of the opened file:
 
     */15 * * * * bash sync-out-dirs.sh
+
+
+## Known issues
+
+If the `train-on-aws.sh` script shows a "Connection refused" error, try increasing the 
+waiting time in the script. Sometimes, the instance doesn't allow a connection even 
+though the AWS API reports it as ready, which may lead to this type of error. 
 
 
