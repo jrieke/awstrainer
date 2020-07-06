@@ -1,10 +1,11 @@
 # train-on-aws
 
-🛠️ Command line tools to run machine learning scripts on AWS instances
+🛠️ Command line tools for machine learning on AWS instances
 
-These scripts enable you to launch AWS instances, run commands on them, and sync the 
-output back to your local computer. This is useful for long-running processes such as 
-training machine learning models.
+train-on-aws is a set of scripts to run machine learning tasks on AWS. With one 
+simple command, it spins up an AWS instance (from your own account), transfers your 
+code & dataset, starts the training run, syncs all output files back to your computer, 
+and terminates the instance after training has finished.
 
 
 ## Requirements
