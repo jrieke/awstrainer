@@ -12,8 +12,6 @@ and terminates the instance after training has finished.
 
 ![](docs/images/demo.gif)
 
-(Boring parts cut out ;)
-
 
 ## Requirements
 
