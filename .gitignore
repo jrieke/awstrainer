@@ -1,3 +1,5 @@
 test-project/out
 aws-synced-out
 aws-key.pem
+__pycache__
+*.egg-info
