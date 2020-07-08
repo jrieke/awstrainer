@@ -5,6 +5,21 @@ import distutils.util
 import click
 from datetime import datetime, timedelta
 from timeloop import Timeloop
+import os.path
+
+
+def check_key_file_exists(key_file):
+    if not os.path.isfile(key_file):
+        raise ValueError(
+            f"Key file '{key_file}' not found, use --key_file to change it"
+        )
+
+
+def check_project_dir_exists(project_dir):
+    if not os.path.isdir(project_dir):
+        raise ValueError(
+            f"Project dir '{project_dir}' not found, use --project_dir to change it"
+        )
 
 
 @click.group()
@@ -47,6 +62,9 @@ def awstrainer():
     help="Seconds to wait after instance startup (this prevents connection refused errors, default: 20)",
 )
 def run(command, launch_template_id, user, key_file, project_dir, wait_time):
+    check_key_file_exists(key_file)
+    check_project_dir_exists(project_dir)
+
     ec2 = boto3.resource("ec2")
 
     # Create instance.
@@ -135,6 +153,8 @@ def run(command, launch_template_id, user, key_file, project_dir, wait_time):
 
 def sync_once(key_file, user, remote_out_dir, local_sync_dir):
     """Perform one sync from output dirs of all instances to local dir."""
+    check_key_file_exists(key_file)
+
     print(datetime.now())
     print()
 
