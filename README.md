@@ -12,8 +12,6 @@ hyperparameter optimization).
 
 ## Demo
 
-THIS DEMO IS OLD AND NEEDS TO BE UPDATED
-
 ![](docs/images/demo.gif)
 
 
