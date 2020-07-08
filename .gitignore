@@ -3,3 +3,4 @@ aws-synced-out
 aws-key.pem
 __pycache__
 *.egg-info
+greet.py

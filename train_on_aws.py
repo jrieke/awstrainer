@@ -5,6 +5,13 @@ import time
 import subprocess
 import distutils.util
 import click
+from datetime import datetime, timedelta
+from timeloop import Timeloop
+
+
+@click.group()
+def awstrainer():
+    pass
 
 
 # Parameters.
@@ -15,9 +22,10 @@ import click
 # COMMAND = "/home/ubuntu/anaconda3/bin/python train.py"  # the command to execute on the remote machine (note that PATH might not be available)
 # WAIT_TIME = 20
 
-# TODO: Check that key file and project dir exist. 
+# TODO: Check that key file and project dir exist.
 
-@click.command(
+
+@awstrainer.command(
     help="Launches an AWS instance, uploads your project dir, executes a command "
     "(e.g. training script), and terminates the instance afterwards. \n\n"
     'Example: python train-on-aws.py --launch_template_id <template> "/home/ubuntu/anaconda3/bin/python train.py"'
@@ -125,6 +133,87 @@ def run(command, launch_template_id, user, key_file, project_dir, wait_time):
             f"Terminate at any time with: aws ec2 terminate-instances "
             f"--instance-ids {instance.id}"
         )
+
+
+def sync_once(key_file, user, remote_out_dir, local_sync_dir):
+    """Perform one sync from output dirs of all instances to local dir."""
+    print(datetime.now())
+    print()
+
+    ec2 = boto3.resource("ec2")
+
+    # Get running instances.
+    filters = [{"Name": "instance-state-name", "Values": ["running"]}]
+    instances = ec2.instances.filter(Filters=filters)
+    print("Found the following instances on your AWS account:")
+    for instance in instances:
+        print(instance.public_dns_name)
+
+    # Iterate through instances and sync out dir to local dir.
+    for instance in instances:
+        print()
+        print("Getting out dir from", instance.public_dns_name)
+        print("-" * 80)
+        subprocess.call(
+            [
+                "rsync",
+                "-av",
+                "-e",
+                f"ssh -i {key_file} -o 'StrictHostKeyChecking=no'",
+                f"{user}@{instance.public_dns_name}:{remote_out_dir}",
+                local_sync_dir,
+            ]
+        )
+        print("-" * 80)
+    print("=" * 80)
+    print()
+
+
+@awstrainer.command(
+    help="Syncs output dirs from all AWS instances to your local computer"
+)
+@click.option(
+    "--user",
+    default="ubuntu",
+    help="Username on the AWS instance (depends on AMI, default: ubuntu)",
+)
+@click.option(
+    "--key_file",
+    default="aws-key.pem",
+    help="Your private key file for AWS (default: aws-key.pem)",
+)
+@click.option(
+    "--remote_out_dir",
+    default="out/",
+    help="Output dir on the remote machine (default: out/)",
+)
+@click.option(
+    "--local_sync_dir",
+    default="aws-synced-out",
+    help="Dir on the local machine to sync all out dirs to (default: aws-synced-out)",
+)
+@click.option(
+    "--every",
+    default=0,
+    help="Seconds to wait between syncs (default: sync only once)",
+)
+def sync(key_file, user, remote_out_dir, local_sync_dir, every):
+
+    if every == 0:
+        # Sync only one time.
+        sync_once(key_file, user, remote_out_dir, local_sync_dir)
+    else:
+        # Set up timer to sync regularly.
+        tl = Timeloop()
+        tl._add_job(
+            sync_once,
+            timedelta(seconds=every),
+            key_file,
+            user,
+            remote_out_dir,
+            local_sync_dir,
+        )
+        tl.start(block=True)
 
 
 if __name__ == "__main__":

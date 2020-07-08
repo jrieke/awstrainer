@@ -15,7 +15,6 @@ setup(
     install_requires=["click", "boto3"],
     entry_points="""
         [console_scripts]
-        train-on-aws-sync=sync:run
-        train-on-aws=train_on_aws:run
+        train-on-aws=train_on_aws:awstrainer
     """,
 )
