@@ -15,6 +15,7 @@ import click
 # COMMAND = "/home/ubuntu/anaconda3/bin/python train.py"  # the command to execute on the remote machine (note that PATH might not be available)
 # WAIT_TIME = 20
 
+# TODO: Check that key file and project dir exist. 
 
 @click.command(
     help="Launches an AWS instance, uploads your project dir, executes a command "
@@ -70,7 +71,7 @@ def run(command, launch_template_id, user, key_file, project_dir, wait_time):
     #   make it work on Windows.
     # TODO: Maybe wrap in extra dir, because if we are using project_dir=., the file
     #   contents end up right in the home dir of the instance
-    print("Sending repo via rsync")
+    print("Sending project dir via rsync (ignoring subdirs .git and out)")
     print("=" * 80)
     # rsync -av -e "ssh -i $KEY_FILE -o 'StrictHostKeyChecking=no'" --exclude=".git" --exclude="out" $DIR $USER@$dns:~
     subprocess.call(
