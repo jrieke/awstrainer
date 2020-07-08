@@ -28,15 +28,8 @@ def awstrainer():
     pass
 
 
-# Parameters.
-# KEY_FILE = "aws-key.pem"  # your private key file for AWS
 # LAUNCH_TEMPLATE_ID = "lt-01ca80d3c2a68e893"  # the launch template from AWS that should be used to create the instance
-# USER = "ubuntu"  # the username on the AWS instance (depends on your AMI)
-# DIR = "test-project"  # the path to your project dir
 # COMMAND = "/home/ubuntu/anaconda3/bin/python train.py"  # the command to execute on the remote machine (note that PATH might not be available)
-# WAIT_TIME = 20
-
-# TODO: Check that key file and project dir exist.
 
 
 @awstrainer.command(
