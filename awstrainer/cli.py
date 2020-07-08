@@ -215,6 +215,3 @@ def sync(key_file, user, remote_out_dir, local_sync_dir, every):
         )
         tl.start(block=True)
 
-
-if __name__ == "__main__":
-    run()
