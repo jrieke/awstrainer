@@ -22,7 +22,7 @@ THIS DEMO IS OLD AND NEEDS TO BE UPDATED
 1. `pip install git+https://github.com/jrieke/awstrainer`
 
 2. Install the AWS CLI from [here](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) 
-and run `aws configure` to [connect your AWS account](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)) (alternatively, you can create a credentials file as 
+and run `aws configure` to [connect your AWS account](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) (alternatively, you can create a credentials file as 
 described [here](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html#configuration)). 
 
 
@@ -67,8 +67,9 @@ For a complete list of options, run `awstrainer sync --help`.
 
 ## Known issues
 
-If the `train-on-aws.sh` script shows a "Connection refused" error, try increasing the 
-waiting time in the script. Sometimes, the instance doesn't allow a connection even 
-though the AWS API reports it as ready, which may lead to this type of error. 
+If `awstrainer run` shows a "Connection refused" error, try increasing the 
+waiting time after instance launch via the `--wait_time` option (default: 20). 
+Sometimes, the instance doesn't allow a connection even though the AWS API reports it 
+as ready, which may lead to this error. 
 
 
