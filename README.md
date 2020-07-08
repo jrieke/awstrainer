@@ -1,6 +1,6 @@
 # awstrainer
 
-🛠️ Command line tools for machine learning on AWS
+🛠️ Command line tool for machine learning on AWS
 
 awstrainer helps you run machine learning tasks (or any other long-running computations) 
 on AWS. With one simple command, it spins up an AWS instance (from your own account), 
