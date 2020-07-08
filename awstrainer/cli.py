@@ -10,15 +10,13 @@ import os.path
 
 def check_key_file_exists(key_file):
     if not os.path.isfile(key_file):
-        raise ValueError(
-            f"Key file '{key_file}' not found, use --key_file to change it"
-        )
+        raise IOError(f"Key file '{key_file}' not found, use --key_file to set it")
 
 
 def check_project_dir_exists(project_dir):
     if not os.path.isdir(project_dir):
-        raise ValueError(
-            f"Project dir '{project_dir}' not found, use --project_dir to change it"
+        raise IOError(
+            f"Project dir '{project_dir}' not found, use --project_dir to set it"
         )
 
 
