@@ -20,6 +20,9 @@ def check_project_dir_exists(project_dir):
         )
 
 
+ec2 = boto3.resource("ec2")
+
+
 @click.group()
 def awstrainer():
     pass
@@ -62,8 +65,6 @@ def awstrainer():
 def run(command, launch_template_id, user, key_file, project_dir, wait_time):
     check_key_file_exists(key_file)
     check_project_dir_exists(project_dir)
-
-    ec2 = boto3.resource("ec2")
 
     # Create instance.
     (instance,) = ec2.create_instances(
@@ -155,8 +156,6 @@ def sync_once(key_file, user, remote_out_dir, local_sync_dir):
 
     print(datetime.now())
     print()
-
-    ec2 = boto3.resource("ec2")
 
     # Get running instances.
     filters = [{"Name": "instance-state-name", "Values": ["running"]}]
