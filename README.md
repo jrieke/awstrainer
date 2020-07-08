@@ -35,11 +35,12 @@ template [from an existing instance](https://docs.aws.amazon.com/AWSEC2/latest/U
 
 Then, navigate into your project dir and run:
 
-    awstrainer run --launch_template_id <id> "python train.py"
+    awstrainer run --launch_template_id <id> "/home/ubuntu/anaconda3/bin/python train.py"
 
 This launches an AWS instance (based on your launch template), uploads the project dir 
-(excluding subdirs `.git` and `out`), executes a command via ssh (here: 
-`python train.py`, but this can be any command), and terminates the instance after 
+(excluding subdirs `.git` and `out`), executes a command via ssh (here it's starting a 
+training script, but this can be any command - note that you have to use absolute 
+paths because $PATH won't be available), and terminates the instance after 
 training has finished. Note that this assumes your private key file from AWS to be 
 stored as `aws-key.pem` in the project dir. To adapt this, set the `--key_file` option. 
 Based on which operating system your instance uses, you may also need to set the 
